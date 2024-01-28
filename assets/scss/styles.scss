@@ -1,11 +1,59 @@
-$primary-color: #cc8080;
-$background-color: #FFFFED;
-$border-color: rgba(204, 128, 128, 0.5);
+$primary-color: #6c5ce7; // New primary color
+$secondary-color: #fd79a8; // New secondary color
+$background-color: #f0f0f0; // Lighter background color
+$border-color: #b2bec3; // Soft border color
+$text-color: #2d3436; // Darker text color for better readability
+$icon-color: #636e72; // Icon color
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap'); // Importing Google Font
 
 @mixin flex-center {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@mixin input-style {
+    position: relative;
+    margin: 30px 0;
+    width: 310px;
+    border-bottom: 2px solid $border-color;
+    
+    label {
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        transform: translateY(-50%);
+        color: $text-color;
+        font-size: 1em;
+        pointer-events: none;
+        transition: 0.5s;
+    }
+    
+    input:focus ~ label,
+    input:valid ~ label {
+        top: -5px;
+    }
+    
+    input {
+        width: 100%;
+        height: 50px;
+        background: transparent;
+        border: none;
+        outline: none;
+        font-size: 1em;
+        padding: 0 35px 0 5px;
+        color: $text-color;
+        font-family: 'Open Sans', sans-serif; // Using the imported font
+    }
+    
+    ion-icon {
+        position: absolute;
+        right: 8px;
+        color: $icon-color;
+        font-size: 1.2em;
+        top: 20px;
+    }
 }
 
 .signin-box {
@@ -16,53 +64,16 @@ $border-color: rgba(204, 128, 128, 0.5);
     border-radius: 20px;
     backdrop-filter: blur(15px);
     @include flex-center;
-
+    
     h2 {
         font-size: 2em;
-        color: black;
+        color: $text-color;
         text-align: center;
+        font-family: 'Open Sans', sans-serif; // Using the imported font
     }
-
+    
     .inputbox {
-        position: relative;
-        margin: 30px 0;
-        width: 310px;
-        border-bottom: 2px solid black;
-
-        label {
-            position: absolute;
-            top: 50%;
-            left: 5px;
-            transform: translateY(-50%);
-            color: black;
-            font-size: 1em;
-            pointer-events: none;
-            transition: 0.5s;
-        }
-
-        input:focus ~ label,
-        input:valid ~ label {
-            top: -5px;
-        }
-
-        input {
-            width: 100%;
-            height: 50px;
-            background: transparent;
-            border: none;
-            outline: none;
-            font-size: 1em;
-            padding: 0 35px 0 5px;
-            color: black;
-        }
-
-        ion-icon {
-            position: absolute;
-            right: 8px;
-            color: black;
-            font-size: 1.2em;
-            top: 20px;
-        }
+        @include input-style;
     }
 }
 
@@ -77,12 +88,18 @@ section {
 
 button {
     width: 100%;
-    height: 40px;
-    border-radius: 40px;
+    padding: 10px 20px;
+    border-radius: 5px;
     background: $primary-color;
-    border: none;
-    outline: none;
+    color: #fff;
     font-size: 1em;
     font-weight: 600;
     cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+    font-family: 'Open Sans', sans-serif; // Using the imported font
+    
+    &:hover {
+        background-color: $secondary-color;
+    }
 }
