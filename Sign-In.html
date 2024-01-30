@@ -117,18 +117,28 @@
             // Fetch JWT 
             fetch(login_url, authOptions)
                 .then(response => {
+                    if (response.status === 403) {
+                        // Handle 403 Forbidden
+                        console.error('Access denied: 403 Forbidden');
+                        alert('Access denied. You do not have permission to access this resource.');
+                        // Optionally, redirect to a different page or log out the user
+                        // window.location.href = '/path/to/login/or/error/page';
+                        return;
+                    }
                     if (!response.ok) {
                         const errorMsg = 'Login error: ' + response.status;
-                        console.log(errorMsg);
+                        console.error(errorMsg);
+                        alert('Failed to login. Please try again.');
                         return;
                     }
-                    if (response.ok) {
-                        console.log('Successful fetch');
-                        return;
-                    }
-                    // Success!!!
-                    // Redirect to Database location
+                    console.log('Successful fetch');
+                    // Continue with your logic for successful response
                     // window.location.href = "/APCSA/data/database";
+                })
+                .catch(error => {
+                    // Handle network errors
+                    console.error('Network error:', error);
+                    alert('Network error. Please try again.');
                 });
             }
         }
